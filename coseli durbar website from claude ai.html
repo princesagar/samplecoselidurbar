@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coseli Durbar – Palace for Premium Gifts</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --orange: #E85D04;
+    --orange-light: #F48C06;
+    --orange-glow: #FF6B35;
+    --black: #0A0A0A;
+    --black2: #111111;
+    --black3: #1A1A1A;
+    --white: #FFFFFF;
+    --cream: #FFF8F0;
+    --gold: #D4A017;
+    --gray: #888888;
+    --border: rgba(232,93,4,0.25);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ====== SCROLLBAR ====== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--black2); }
+  ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+  /* ====== PRELOADER ====== */
+  #preloader {
+    position: fixed; inset: 0; background: var(--black); z-index: 9999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 0.6s ease;
+  }
+  #preloader .logo-anim {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--orange);
+    animation: pulse 1.5s ease-in-out infinite;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  #preloader .loader-bar {
+    width: 200px; height: 3px; background: var(--black3); margin-top: 20px; border-radius: 2px; overflow: hidden;
+  }
+  #preloader .loader-fill {
+    height: 100%; background: linear-gradient(90deg, var(--orange), var(--orange-light));
+    animation: load 2s ease forwards;
+  }
+  @keyframes load { from { width:0 } to { width:100% } }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+  /* ====== TOP BAR ====== */
+  .topbar {
+    background: var(--orange);
+    padding: 6px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 6px;
+    font-size: 0.78rem; font-family: 'Rajdhani', sans-serif; font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .topbar a { color: var(--white); text-decoration: none; margin-left: 10px; }
+  .topbar a:hover { text-decoration: underline; }
+
+  /* ====== NAVBAR ====== */
+  nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; color: var(--white);
+    box-shadow: 0 0 20px rgba(232,93,4,0.4);
+  }
+  .nav-brand-text { line-height: 1.1; }
+  .nav-brand-text .title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--orange); letter-spacing: 1px;
+  }
+  .nav-brand-text .tagline {
+    font-size: 0.65rem; color: var(--gray); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 0; list-style: none;
+  }
+  .nav-links li a {
+    color: var(--white); text-decoration: none;
+    padding: 8px 14px; border-radius: 6px;
+    font-size: 0.88rem; font-weight: 600; letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+  }
+  .nav-links li a:hover { color: var(--orange); background: rgba(232,93,4,0.1); }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .btn-book-nav {
+    background: var(--orange); color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 9px 20px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 0.88rem; cursor: pointer;
+    transition: all 0.2s ease; letter-spacing: 0.5px;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-book-nav:hover { background: var(--orange-light); transform: translateY(-1px); box-shadow: 0 4px 15px rgba(232,93,4,0.4); }
+  .hamburger { display: none; background: none; border: none; color: var(--white); font-size: 1.4rem; cursor: pointer; }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; background: var(--black2);
+    z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--white); font-size: 1.4rem; text-decoration: none; font-family: 'Cinzel Decorative', serif; transition: color 0.2s; }
+  .mobile-menu a:hover { color: var(--orange); }
+  .mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: var(--white); font-size: 1.6rem; cursor: pointer; }
+
+  /* ====== HERO ====== */
+  .hero {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 70% 50%, rgba(232,93,4,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(244,140,6,0.07) 0%, transparent 50%),
+                var(--black);
+    display: flex; align-items: center;
+    padding: 80px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-particles {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .particle {
+    position: absolute; width: 4px; height: 4px; border-radius: 50%;
+    background: var(--orange); opacity: 0;
+    animation: float-particle var(--dur, 6s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes float-particle {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+  .hero-content { max-width: 600px; z-index: 2; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,93,4,0.15); border: 1px solid var(--border);
+    border-radius: 50px; padding: 6px 16px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--orange-light);
+    margin-bottom: 24px; animation: fadeUp 0.8s 0.3s both;
+  }
+  .hero h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 10px;
+    animation: fadeUp 0.8s 0.5s both;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--gray);
+    margin-bottom: 30px;
+    font-style: italic;
+    animation: fadeUp 0.8s 0.7s both;
+  }
+  .hero-desc {
+    font-size: 1rem; color: #BBBBBB; line-height: 1.7;
+    margin-bottom: 36px;
+    animation: fadeUp 0.8s 0.9s both;
+  }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.8s 1.1s both; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    color: var(--white); border: none; border-radius: 10px;
+    padding: 14px 32px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 1rem; cursor: pointer;
+    transition: all 0.3s ease; letter-spacing: 1px;
+    text-decoration: none; display: inline-block;
+    box-shadow: 0 4px 20px rgba(232,93,4,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,93,4,0.5); }
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    border: 2px solid rgba(255,255,255,0.2); border-radius: 10px;
+    padding: 14px 32px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 1rem; cursor: pointer;
+    transition: all 0.3s ease; letter-spacing: 1px;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 1.3s both;
+  }
+  .stat { border-left: 3px solid var(--orange); padding-left: 14px; }
+  .stat .num { font-family: 'Cinzel Decorative', serif; font-size: 1.6rem; color: var(--orange); }
+  .stat .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+
+  .hero-visual {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 50%; display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .hero-ring {
+    width: clamp(300px, 40vw, 550px); height: clamp(300px, 40vw, 550px);
+    border: 2px solid var(--border);
+    border-radius: 50%; position: absolute;
+    animation: spin-slow 20s linear infinite;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-ring::before {
+    content: ''; position: absolute;
+    width: 12px; height: 12px; background: var(--orange);
+    border-radius: 50%; top: -6px; left: 50%;
+    box-shadow: 0 0 20px var(--orange);
+  }
+  .hero-ring-2 {
+    width: clamp(220px, 30vw, 400px); height: clamp(220px, 30vw, 400px);
+    border: 1px dashed rgba(232,93,4,0.2);
+    animation-direction: reverse; animation-duration: 15s;
+  }
+  .hero-center-img {
+    width: clamp(200px, 28vw, 350px); height: clamp(200px, 28vw, 350px);
+    background: linear-gradient(135deg, var(--black3), var(--black2));
+    border-radius: 50%; border: 3px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: clamp(4rem, 8vw, 7rem);
+    box-shadow: 0 0 60px rgba(232,93,4,0.2), inset 0 0 40px rgba(232,93,4,0.05);
+    z-index: 1;
+    overflow: hidden;
+  }
+  .hero-center-img img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%; opacity: 0.85;
+  }
+  @keyframes spin-slow { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(30px) } to { opacity:1; transform:translateY(0) } }
+
+  /* ====== MARQUEE ====== */
+  .marquee-section {
+    background: var(--orange); padding: 12px 0; overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .marquee-track {
+    display: flex; gap: 60px; animation: marquee 20s linear infinite; width: max-content;
+  }
+  .marquee-item {
+    display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .marquee-item i { font-size: 0.8rem; }
+  @keyframes marquee { from { transform:translateX(0) } to { transform:translateX(-50%) } }
+
+  /* ====== SECTIONS ====== */
+  section { padding: 80px 5%; }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-tag {
+    display: inline-block; background: rgba(232,93,4,0.12);
+    color: var(--orange); border: 1px solid var(--border);
+    border-radius: 50px; padding: 5px 18px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    color: var(--white); margin-bottom: 14px;
+  }
+  .section-title span { color: var(--orange); }
+  .section-desc { font-size: 1rem; color: var(--gray); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+  /* ====== CATEGORIES ====== */
+  #categories { background: var(--black2); }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .cat-card {
+    background: var(--black3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .cat-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(232,93,4,0.05), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .cat-card:hover { border-color: var(--orange); transform: translateY(-6px); box-shadow: 0 12px 40px rgba(232,93,4,0.2); }
+  .cat-card:hover::before { opacity: 1; }
+  .cat-img {
+    width: 80px; height: 80px; border-radius: 50%;
+    object-fit: cover; margin: 0 auto 14px;
+    border: 2px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .cat-card:hover .cat-img { border-color: var(--orange); }
+  .cat-icon {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: linear-gradient(135deg, rgba(232,93,4,0.2), rgba(244,140,6,0.1));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px; font-size: 1.8rem;
+    border: 2px solid var(--border);
+    transition: all 0.3s;
+  }
+  .cat-card:hover .cat-icon { background: rgba(232,93,4,0.3); border-color: var(--orange); }
+  .cat-name { font-weight: 700; font-size: 0.95rem; color: var(--white); margin-bottom: 4px; }
+  .cat-count { font-size: 0.75rem; color: var(--gray); }
+
+  /* ====== PRODUCTS ====== */
+  #products { background: var(--black); }
+  .filter-bar {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px;
+  }
+  .filter-btn {
+    background: var(--black3); color: var(--gray);
+    border: 1px solid var(--border); border-radius: 50px;
+    padding: 8px 22px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 600; font-size: 0.85rem; cursor: pointer;
+    transition: all 0.2s ease; letter-spacing: 0.5px;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--orange); color: var(--white); border-color: var(--orange); }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .product-card {
+    background: var(--black2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(232,93,4,0.2); border-color: var(--orange); }
+  .product-img-wrap {
+    position: relative; height: 220px; overflow: hidden;
+    background: var(--black3);
+  }
+  .product-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .product-card:hover .product-img-wrap img { transform: scale(1.08); }
+  .product-badge {
+    position: absolute; top: 14px; left: 14px;
+    background: var(--orange); color: var(--white);
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 1px;
+    padding: 4px 10px; border-radius: 50px;
+    text-transform: uppercase;
+  }
+  .product-badge.new { background: #22c55e; }
+  .product-badge.hot { background: #ef4444; }
+  .product-wishlist {
+    position: absolute; top: 14px; right: 14px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(10,10,10,0.8); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s;
+    font-size: 0.9rem; color: var(--gray);
+  }
+  .product-wishlist:hover, .product-wishlist.active { background: rgba(232,93,4,0.2); border-color: var(--orange); color: var(--orange); }
+  .product-info { padding: 18px 20px; }
+  .product-cat { font-size: 0.7rem; color: var(--orange); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 6px; }
+  .product-name { font-weight: 700; font-size: 1.05rem; color: var(--white); margin-bottom: 8px; line-height: 1.3; }
+  .product-desc { font-size: 0.82rem; color: var(--gray); margin-bottom: 14px; line-height: 1.5; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--orange); }
+  .product-price .from { font-size: 0.7rem; color: var(--gray); display: block; font-family: 'Rajdhani', sans-serif; }
+  .btn-order {
+    background: var(--orange); color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 8px 18px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 0.82rem; cursor: pointer;
+    transition: all 0.2s ease; letter-spacing: 0.5px;
+  }
+  .btn-order:hover { background: var(--orange-light); transform: scale(1.03); }
+  .product-rating { display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
+  .stars { color: var(--gold); font-size: 0.78rem; }
+  .rating-count { font-size: 0.72rem; color: var(--gray); }
+
+  /* ====== PROCESS ====== */
+  #process { background: var(--black2); }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px;
+    position: relative;
+  }
+  .process-step {
+    text-align: center; padding: 32px 24px;
+    background: var(--black3); border: 1px solid var(--border);
+    border-radius: 20px; position: relative; transition: all 0.3s;
+  }
+  .process-step:hover { border-color: var(--orange); transform: translateY(-4px); }
+  .step-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-family: 'Cinzel Decorative', serif; font-size: 1rem; font-weight: 700;
+    box-shadow: 0 4px 20px rgba(232,93,4,0.35);
+  }
+  .step-icon { font-size: 1.6rem; margin-bottom: 12px; }
+  .step-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+  .step-desc { font-size: 0.83rem; color: var(--gray); line-height: 1.6; }
+
+  /* ====== WHY US ====== */
+  #why { background: var(--black); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .why-card {
+    padding: 28px; border: 1px solid var(--border); border-radius: 18px;
+    background: var(--black2); transition: all 0.3s;
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .why-card:hover { border-color: var(--orange); box-shadow: 0 8px 30px rgba(232,93,4,0.12); }
+  .why-icon {
+    width: 50px; height: 50px; flex-shrink: 0;
+    background: rgba(232,93,4,0.12); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; color: var(--orange);
+    border: 1px solid var(--border);
+  }
+  .why-text .title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+  .why-text .desc { font-size: 0.83rem; color: var(--gray); line-height: 1.6; }
+
+  /* ====== BOOKING ====== */
+  #booking { background: var(--black2); }
+  .booking-container {
+    max-width: 780px; margin: 0 auto;
+    background: var(--black3); border: 1px solid var(--border);
+    border-radius: 24px; overflow: hidden;
+  }
+  .booking-top {
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    padding: 28px 36px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .booking-top i { font-size: 1.8rem; }
+  .booking-top h3 { font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; }
+  .booking-top p { font-size: 0.85rem; opacity: 0.9; }
+  .booking-body { padding: 36px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--gray); letter-spacing: 0.5px; text-transform: uppercase; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--black2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 13px 16px;
+    color: var(--white); font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem; transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,93,4,0.1); }
+  .form-group select option { background: var(--black2); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: #555; }
+  .design-upload {
+    background: var(--black2); border: 2px dashed var(--border);
+    border-radius: 10px; padding: 24px;
+    text-align: center; cursor: pointer; transition: border-color 0.2s;
+  }
+  .design-upload:hover { border-color: var(--orange); }
+  .design-upload i { font-size: 1.8rem; color: var(--orange); margin-bottom: 8px; }
+  .design-upload p { font-size: 0.85rem; color: var(--gray); }
+  .btn-submit {
+    width: 100%; background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    color: var(--white); border: none; border-radius: 12px;
+    padding: 16px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 1.05rem; cursor: pointer;
+    transition: all 0.3s; letter-spacing: 1px;
+    margin-top: 8px;
+  }
+  .btn-submit:hover { box-shadow: 0 8px 30px rgba(232,93,4,0.45); transform: translateY(-2px); }
+  .whatsapp-note {
+    text-align: center; margin-top: 16px;
+    font-size: 0.83rem; color: var(--gray);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .whatsapp-note i { color: #25D366; font-size: 1rem; }
+
+  /* ====== TESTIMONIALS ====== */
+  #testimonials { background: var(--black); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .testi-card {
+    background: var(--black2); border: 1px solid var(--border);
+    border-radius: 20px; padding: 28px; transition: all 0.3s;
+  }
+  .testi-card:hover { border-color: var(--orange); transform: translateY(-4px); }
+  .testi-top { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .testi-avatar {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel Decorative', serif; font-size: 1rem;
+    font-weight: 700; flex-shrink: 0;
+    overflow: hidden;
+  }
+  .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .testi-name { font-weight: 700; font-size: 0.95rem; }
+  .testi-role { font-size: 0.72rem; color: var(--gray); }
+  .testi-stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 10px; }
+  .testi-text { font-size: 0.88rem; color: #BBBBBB; line-height: 1.7; font-style: italic; }
+  .testi-text::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--orange); line-height: 0; vertical-align: -0.8rem; margin-right: 4px; }
+
+  /* ====== GALLERY ====== */
+  #gallery { background: var(--black2); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .gallery-item {
+    border-radius: 14px; overflow: hidden;
+    aspect-ratio: 1; position: relative; cursor: pointer;
+    background: var(--black3);
+  }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .gallery-item:hover img { transform: scale(1.1); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(232,93,4,0.7);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+    font-size: 1.8rem; color: var(--white);
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  /* ====== CONTACT ====== */
+  #contact { background: var(--black); }
+  .contact-wrapper {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: start;
+  }
+  .contact-info h3 { font-family: 'Cinzel Decorative', serif; font-size: 1.4rem; margin-bottom: 24px; }
+  .contact-info h3 span { color: var(--orange); }
+  .contact-items { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px; border: 1px solid var(--border);
+    border-radius: 16px; background: var(--black2); transition: all 0.3s;
+  }
+  .contact-item:hover { border-color: var(--orange); }
+  .contact-item-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: rgba(232,93,4,0.12); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--orange); font-size: 1.1rem;
+  }
+  .contact-item-text .label { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .contact-item-text .value { font-weight: 600; font-size: 0.95rem; }
+  .contact-item-text a { color: var(--white); text-decoration: none; }
+  .contact-item-text a:hover { color: var(--orange); }
+  .social-links { display: flex; gap: 12px; margin-top: 24px; }
+  .social-btn {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--black2); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gray); font-size: 1rem; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .social-btn:hover { background: rgba(232,93,4,0.15); border-color: var(--orange); color: var(--orange); }
+  .social-btn.wa:hover { background: rgba(37,211,102,0.15); border-color: #25D366; color: #25D366; }
+  .contact-form-panel {
+    background: var(--black2); border: 1px solid var(--border);
+    border-radius: 24px; padding: 36px;
+  }
+  .contact-form-panel h4 { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; margin-bottom: 24px; }
+
+  /* ====== MAP ====== */
+  .map-wrap {
+    border-radius: 18px; overflow: hidden; margin-top: 60px;
+    border: 1px solid var(--border); height: 300px;
+    background: var(--black2); display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 12px;
+  }
+  .map-wrap i { font-size: 2rem; color: var(--orange); }
+  .map-wrap p { font-size: 0.88rem; color: var(--gray); }
+  .map-wrap a {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange); color: var(--white); text-decoration: none;
+    border-radius: 8px; padding: 10px 22px; font-weight: 700; font-size: 0.88rem;
+    transition: all 0.2s;
+  }
+  .map-wrap a:hover { background: var(--orange-light); }
+
+  /* ====== WHATSAPP FLOAT ====== */
+  .wa-float {
+    position: fixed; bottom: 24px; right: 24px; z-index: 500;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366; color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+    transition: all 0.3s; animation: wa-bounce 2s ease-in-out infinite;
+  }
+  .wa-float:hover { transform: scale(1.12); box-shadow: 0 8px 30px rgba(37,211,102,0.7); }
+  @keyframes wa-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--black2);
+    border-top: 1px solid var(--border);
+    padding: 60px 5% 30px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px;
+  }
+  .footer-brand .logo { margin-bottom: 16px; }
+  .footer-brand .desc { font-size: 0.85rem; color: var(--gray); line-height: 1.7; max-width: 280px; margin-bottom: 20px; }
+  .footer-col h5 { font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 18px; color: var(--orange); }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--orange); }
+  .footer-bottom {
+    border-top: 1px solid var(--border); padding-top: 24px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 0.78rem; color: var(--gray);
+  }
+  .footer-bottom a { color: var(--orange); text-decoration: none; }
+  .made-with { display: flex; align-items: center; gap: 6px; }
+  .made-with i { color: var(--orange); }
+
+  /* ====== MODAL ====== */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 2000; display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--black2); border: 1px solid var(--border);
+    border-radius: 24px; max-width: 500px; width: 100%;
+    max-height: 90vh; overflow-y: auto; padding: 36px;
+    animation: modal-in 0.3s ease;
+    position: relative;
+  }
+  @keyframes modal-in { from { opacity:0; transform:scale(0.9) } to { opacity:1; transform:scale(1) } }
+  .modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; color: var(--gray);
+    font-size: 1.4rem; cursor: pointer; transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--orange); }
+  .modal img { width: 100%; height: 200px; object-fit: cover; border-radius: 14px; margin-bottom: 20px; }
+  .modal h3 { font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; margin-bottom: 8px; }
+  .modal .price { font-size: 1.4rem; color: var(--orange); font-family: 'Cormorant Garamond', serif; margin-bottom: 14px; }
+  .modal p { font-size: 0.88rem; color: #BBBBBB; line-height: 1.7; margin-bottom: 20px; }
+  .modal-actions { display: flex; gap: 12px; }
+  .btn-wa-order {
+    flex: 1; background: #25D366; color: var(--white); border: none;
+    border-radius: 10px; padding: 13px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 0.95rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-wa-order:hover { background: #1ebe5d; }
+  .btn-book-modal {
+    flex: 1; background: var(--orange); color: var(--white); border: none;
+    border-radius: 10px; padding: 13px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-book-modal:hover { background: var(--orange-light); }
+
+  /* ====== SUCCESS TOAST ====== */
+  .toast {
+    position: fixed; bottom: 100px; right: 24px; z-index: 3000;
+    background: var(--black2); border: 1px solid #22c55e;
+    border-radius: 12px; padding: 16px 24px;
+    display: flex; align-items: center; gap: 12px;
+    transform: translateX(200px); opacity: 0;
+    transition: all 0.4s ease;
+    max-width: 320px;
+  }
+  .toast.show { transform: translateX(0); opacity: 1; }
+  .toast i { color: #22c55e; font-size: 1.2rem; }
+  .toast-msg { font-size: 0.88rem; font-weight: 600; }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .contact-wrapper { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .hero { min-height: auto; padding: 100px 5% 60px; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero-stats { gap: 20px; }
+    .topbar { justify-content: center; text-align: center; }
+  }
+
+  /* ====== ANIMATIONS ON SCROLL ====== */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ====== LASER BEAM EFFECT ====== */
+  .laser-text {
+    position: relative; display: inline-block;
+  }
+  .laser-text::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--orange), var(--orange-light), transparent);
+    animation: laser-scan 2s linear infinite;
+  }
+  @keyframes laser-scan {
+    0% { clip-path: inset(0 100% 0 0); }
+    50% { clip-path: inset(0 0% 0 0); }
+    100% { clip-path: inset(0 0 0 100%); }
+  }
+
+  /* === PROMO BANNER === */
+  .promo-banner {
+    background: linear-gradient(135deg, var(--black3), var(--black2));
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px;
+    display: flex; align-items: center; gap: 30px;
+    flex-wrap: wrap; margin-top: 60px;
+  }
+  .promo-icon { font-size: 3rem; flex-shrink: 0; }
+  .promo-text { flex: 1; min-width: 220px; }
+  .promo-text h3 { font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; margin-bottom: 8px; }
+  .promo-text p { font-size: 0.88rem; color: var(--gray); }
+  .promo-action { flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="logo-anim">✦ Coseli Durbar ✦</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>🏆 Laser Engraving Specialists • Pokhara, Nepal</span>
+  <span>
+    <a href="tel:+9779849432325"><i class="fas fa-phone"></i> +977 9849432325</a>
+    <a href="mailto:sagarchokhal0@gmail.com"><i class="fas fa-envelope"></i> sagarchokhal0@gmail.com</a>
+    <a href="https://wa.me/9779849432325" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  </span>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-logo-icon">✦</div>
+    <div class="nav-brand-text">
+      <div class="title">Coseli Durbar</div>
+      <div class="tagline">Palace for Premium Gifts</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#booking" class="btn-book-nav">Book Now</a>
+    <button class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+  <a href="#categories" onclick="toggleMenu()">Categories</a>
+  <a href="#products" onclick="toggleMenu()">Products</a>
+  <a href="#process" onclick="toggleMenu()">How It Works</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#booking" onclick="toggleMenu()">Book Order</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ <span>Laser Engraved • Handcrafted • Premium</span> ✦</div>
+    <h1><span>Coseli</span> Durbar<br>Palace of Premium<br>Gifts</h1>
+    <p class="hero-subtitle">Where Artistry Meets Precision Engraving</p>
+    <p class="hero-desc">Custom laser-engraved gifts for every occasion — couples, devotees, businesses & beyond. Based in Batulechaur-16, Pokhara. Crafted with love, precision & tradition.</p>
+    <div class="hero-buttons">
+      <a href="#products" class="btn-primary">✦ Explore Products</a>
+      <a href="#booking" class="btn-secondary">Book Custom Order</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">500+</div><div class="label">Happy Clients</div></div>
+      <div class="stat"><div class="num">50+</div><div class="label">Gift Types</div></div>
+      <div class="stat"><div class="num">5★</div><div class="label">Rated Service</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-ring">
+      <div class="hero-ring hero-ring-2"></div>
+      <div class="hero-center-img">🎁</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item"><i class="fas fa-star"></i> Leaf Art</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Couple Gifts</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> God & Goddess Art</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Keyrings</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Lockets</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Bottle Art</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Company Logo</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Visiting Cards</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Laser Engraving</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Leaf Art</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Couple Gifts</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> God & Goddess Art</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Keyrings</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Lockets</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Bottle Art</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Company Logo</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Visiting Cards</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Laser Engraving</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="section-header fade-up">
+    <div class="section-tag">Browse Collections</div>
+    <h2 class="section-title">Our Gift <span>Categories</span></h2>
+    <p class="section-desc">From romantic couple gifts to sacred devotional art — find the perfect laser-engraved piece for every person and occasion.</p>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card fade-up" onclick="filterProducts('couples')">
+      <div class="cat-icon">💑</div>
+      <div class="cat-name">Couple Gifts</div>
+      <div class="cat-count">Romantic Leaf Art & More</div>
+    </div>
+    <div class="cat-card fade-up" onclick="filterProducts('divine')">
+      <div class="cat-icon">🙏</div>
+      <div class="cat-name">God & Goddess Art</div>
+      <div class="cat-count">Devotional Leaf Engravings</div>
+    </div>
+    <div class="cat-card fade-up" onclick="filterProducts('keyring')">
+      <div class="cat-icon">🗝️</div>
+      <div class="cat-name">Keyrings</div>
+      <div class="cat-count">Custom Engraved Keychains</div>
+    </div>
+    <div class="cat-card fade-up" onclick="filterProducts('locket')">
+      <div class="cat-icon">📿</div>
+      <div class="cat-name">Lockets</div>
+      <div class="cat-count">Personalized Pendants</div>
+    </div>
+    <div class="cat-card fade-up" onclick="filterProducts('bottle')">
+      <div class="cat-icon">🍶</div>
+      <div class="cat-name">Bottle Art</div>
+      <div class="cat-count">Engraved Bottles & Flasks</div>
+    </div>
+    <div class="cat-card fade-up" onclick="filterProducts('business')">
+      <div class="cat-icon">🏢</div>
+      <div class="cat-name">Company Logos</div>
+      <div class="cat-count">Corporate Branding Gifts</div>
+    </div>
+    <div class="cat-card fade-up" onclick="filterProducts('card')">
+      <div class="cat-icon">🦋</div>
+      <div class="cat-name">Butterfly Visiting Cards</div>
+      <div class="cat-count">Unique Laser-Cut Cards</div>
+    </div>
+    <div class="cat-card fade-up" onclick="filterProducts('all')">
+      <div class="cat-icon">🎁</div>
+      <div class="cat-name">All Gifts</div>
+      <div class="cat-count">View Everything</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-header fade-up">
+    <div class="section-tag">Our Catalogue</div>
+    <h2 class="section-title">Premium <span>Products</span></h2>
+    <p class="section-desc">Every piece crafted with our precision laser engraving machine. 100% customizable to your design.</p>
+  </div>
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" onclick="filterProducts('all',this)">All Products</button>
+    <button class="filter-btn" onclick="filterProducts('couples',this)">Couple Gifts</button>
+    <button class="filter-btn" onclick="filterProducts('divine',this)">Devotional</button>
+    <button class="filter-btn" onclick="filterProducts('keyring',this)">Keyrings</button>
+    <button class="filter-btn" onclick="filterProducts('locket',this)">Lockets</button>
+    <button class="filter-btn" onclick="filterProducts('bottle',this)">Bottle Art</button>
+    <button class="filter-btn" onclick="filterProducts('business',this)">Business</button>
+    <button class="filter-btn" onclick="filterProducts('card',this)">Visiting Cards</button>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="process">
+  <div class="section-header fade-up">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-title">How It <span>Works</span></h2>
+    <p class="section-desc">Simple, transparent, and crafted to perfection — your order in 4 easy steps.</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step fade-up">
+      <div class="step-num">1</div>
+      <div class="step-icon">📋</div>
+      <div class="step-title">Choose & Customize</div>
+      <div class="step-desc">Browse our catalogue, pick a product, and share your custom design — names, photos, logos, or messages.</div>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">2</div>
+      <div class="step-icon">💬</div>
+      <div class="step-title">Confirm Order</div>
+      <div class="step-desc">Send us your details via WhatsApp or the booking form. We'll confirm availability and pricing within hours.</div>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">3</div>
+      <div class="step-icon">⚡</div>
+      <div class="step-title">Laser Engraving</div>
+      <div class="step-desc">Our precision laser machine engraves your design onto the chosen material with exceptional accuracy and detail.</div>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">4</div>
+      <div class="step-icon">📦</div>
+      <div class="step-title">Delivery or Pickup</div>
+      <div class="step-desc">Collect from our studio in Batulechaur-16, Pokhara or get it delivered. Beautifully packaged every time.</div>
+    </div>
+  </div>
+
+  <div class="promo-banner fade-up">
+    <div class="promo-icon">🎊</div>
+    <div class="promo-text">
+      <h3>Custom Corporate & Bulk Orders Welcome!</h3>
+      <p>Planning a wedding, corporate event, or religious function? We offer special pricing on bulk orders of 10+ items. Contact us to discuss your requirements.</p>
+    </div>
+    <div class="promo-action">
+      <a href="https://wa.me/9779849432325?text=Hi! I'm interested in bulk/corporate orders from Coseli Durbar" target="_blank" class="btn-primary" style="text-decoration:none">WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-header fade-up">
+    <div class="section-tag">Why Choose Us</div>
+    <h2 class="section-title">The Coseli <span>Difference</span></h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fas fa-laser-pointer" style="font-size:1.1rem">⚡</i></div>
+      <div class="why-text"><div class="title">Precision Laser Technology</div><div class="desc">Our professional-grade laser engraving machine delivers micron-level accuracy on every piece.</div></div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fas fa-leaf"></i></div>
+      <div class="why-text"><div class="title">Natural Leaf Artworks</div><div class="desc">Unique eco-friendly leaf art — real dried leaves engraved with portraits, gods, and couple names.</div></div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fas fa-paint-brush"></i></div>
+      <div class="why-text"><div class="title">100% Customizable</div><div class="desc">Your design, your names, your memories — we engrave exactly what you envision.</div></div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fas fa-clock"></i></div>
+      <div class="why-text"><div class="title">Fast Turnaround</div><div class="desc">Most orders ready within 24–48 hours. Urgent same-day service available for select products.</div></div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fas fa-medal"></i></div>
+      <div class="why-text"><div class="title">Quality Guaranteed</div><div class="desc">Premium materials, lasting engravings, and careful quality checks on every single item.</div></div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fas fa-heart"></i></div>
+      <div class="why-text"><div class="title">Made With Love</div><div class="desc">Based in the heart of Pokhara, we pour passion into every gift we create for our community.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-header fade-up">
+    <div class="section-tag">Place Your Order</div>
+    <h2 class="section-title">Book a <span>Custom Order</span></h2>
+    <p class="section-desc">Fill in the details below and we'll get back to you within a few hours. WhatsApp confirmation included.</p>
+  </div>
+  <div class="booking-container fade-up">
+    <div class="booking-top">
+      <i class="fas fa-crown"></i>
+      <div>
+        <h3>Order Booking Form</h3>
+        <p>Tell us what you need — we'll make it beautiful.</p>
+      </div>
+    </div>
+    <div class="booking-body">
+      <form id="bookingForm" onsubmit="submitBooking(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Your Full Name *</label>
+            <input id="b_name" type="text" placeholder="e.g. Sagar Chokhal" required>
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp *</label>
+            <input id="b_phone" type="tel" placeholder="e.g. 98XXXXXXXX" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input id="b_email" type="email" placeholder="e.g. you@email.com">
+          </div>
+          <div class="form-group">
+            <label>Product Category *</label>
+            <select id="b_category" required>
+              <option value="">Select Category</option>
+              <option>Couple Leaf Art</option>
+              <option>God & Goddess Leaf Art</option>
+              <option>Custom Keyring</option>
+              <option>Engraved Locket</option>
+              <option>Bottle Art Engraving</option>
+              <option>Company Logo Engraving</option>
+              <option>Butterfly Visiting Card</option>
+              <option>Other / Custom Request</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Occasion</label>
+            <select id="b_occasion">
+              <option value="">Select Occasion</option>
+              <option>Wedding / Anniversary</option>
+              <option>Birthday</option>
+              <option>Valentine's Day</option>
+              <option>Religious / Pooja</option>
+              <option>Corporate / Business</option>
+              <option>Graduation</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Quantity *</label>
+            <input id="b_qty" type="number" placeholder="e.g. 1" min="1" required>
+          </div>
+          <div class="form-group full">
+            <label>Your Design / Message / Names *</label>
+            <textarea id="b_design" placeholder="Describe your design: names to engrave, image description, any special instructions..." required></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Upload Reference Image (Optional)</label>
+            <div class="design-upload" onclick="document.getElementById('fileInput').click()">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Click to upload photo or design reference (JPG, PNG, PDF)</p>
+            </div>
+            <input type="file" id="fileInput" accept="image/*,.pdf" style="display:none" onchange="showFile(this)">
+            <div id="fileName" style="font-size:0.8rem;color:var(--orange);margin-top:6px"></div>
+          </div>
+          <div class="form-group full">
+            <label>Delivery Preference</label>
+            <select id="b_delivery">
+              <option>Pickup from Batulechaur-16, Pokhara</option>
+              <option>Home Delivery in Pokhara</option>
+              <option>Courier (Outside Pokhara)</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">✦ Submit Booking via WhatsApp</button>
+        <div class="whatsapp-note"><i class="fab fa-whatsapp"></i> Clicking submit will open WhatsApp with your booking details pre-filled for +977 9849432325</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header fade-up">
+    <div class="section-tag">Client Stories</div>
+    <h2 class="section-title">What Our <span>Clients Say</span></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testi-card fade-up">
+      <div class="testi-top">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#E85D04,#F48C06)">P</div>
+        <div><div class="testi-name">Priya Sharma</div><div class="testi-role">Couple Gift — Anniversary</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Got a custom leaf art engraving with our names for our 3rd anniversary. The detail was absolutely stunning — my husband was speechless! Highly recommend Coseli Durbar.</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-top">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">R</div>
+        <div><div class="testi-name">Ram Prasad Poudel</div><div class="testi-role">God & Goddess Leaf Art</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Ordered a Lord Ganesh leaf art for our Pooja room. The engraving is sacred and beautiful. Everyone who visits asks where we got it. Truly a palace of gifts!</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-top">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#059669,#10b981)">A</div>
+        <div><div class="testi-name">Ankit Gurung</div><div class="testi-role">Butterfly Visiting Cards</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">My butterfly laser-cut visiting cards are the talk of every business meeting. People are amazed — I've never had such a unique card. Will order bulk very soon!</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-top">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#dc2626,#f97316)">S</div>
+        <div><div class="testi-name">Sunita Thapa</div><div class="testi-role">Engraved Keyring</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Got keyrings made for my entire family with everyone's names. Delivered on time, beautifully packaged, and the engraving is crisp. Thank you Coseli Durbar!</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-top">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#0284c7,#38bdf8)">B</div>
+        <div><div class="testi-name">Bikash Enterprises</div><div class="testi-role">Corporate Logo Engraving</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">We ordered 50 engraved bottles with our company logo for a client gifting event. Coseli Durbar delivered every single one perfectly within 3 days. Amazing service!</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-top">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#d97706,#fbbf24)">K</div>
+        <div><div class="testi-name">Kavya Rai</div><div class="testi-role">Engraved Locket Gift</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">My mother cried happy tears when she received the locket engraved with a family photo. This is not just a product — it's an emotion. Coseli Durbar is the best!</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header fade-up">
+    <div class="section-tag">Our Work</div>
+    <h2 class="section-title">Craftsmanship <span>Gallery</span></h2>
+    <p class="section-desc">A peek into the artistry we create every day with our precision laser engraving machine.</p>
+  </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-up">
+    <div class="section-tag">Get In Touch</div>
+    <h2 class="section-title">Find <span>Us</span></h2>
+  </div>
+  <div class="contact-wrapper">
+    <div class="contact-info fade-up">
+      <h3>Visit <span>Coseli Durbar</span></h3>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-item-text">
+            <div class="label">Studio Location</div>
+            <div class="value">Batulechaur-16, Pokhara<br>Gandaki Pradesh, Nepal</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fab fa-whatsapp"></i></div>
+          <div class="contact-item-text">
+            <div class="label">WhatsApp / Call</div>
+            <div class="value"><a href="https://wa.me/9779849432325" target="_blank">+977 9849432325</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-item-text">
+            <div class="label">Email</div>
+            <div class="value"><a href="mailto:sagarchokhal0@gmail.com">sagarchokhal0@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+          <div class="contact-item-text">
+            <div class="label">Working Hours</div>
+            <div class="value">Sun–Fri: 9:00 AM – 7:00 PM<br>Saturday: 10:00 AM – 5:00 PM</div>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://wa.me/9779849432325" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:sagarchokhal0@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="contact-form-panel fade-up">
+      <h4>✦ Send Us a Message</h4>
+      <form onsubmit="submitContact(event)">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="form-group"><label>Your Name</label><input type="text" placeholder="Full name" required></div>
+          <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+977 XXXXXXXXXX" required></div>
+          <div class="form-group"><label>Subject</label><input type="text" placeholder="e.g. Custom couple leaf art" required></div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your requirement..." style="min-height:120px" required></textarea></div>
+          <button type="submit" class="btn-submit" style="margin-top:0">Send Message →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="map-wrap fade-up">
+    <i class="fas fa-map-pin"></i>
+    <p>Coseli Durbar — Batulechaur-16, Pokhara, Nepal</p>
+    <a href="https://maps.google.com/?q=Batulechaur+Pokhara+Nepal" target="_blank"><i class="fas fa-map-marker-alt"></i> Open in Google Maps</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo" style="font-family:'Cinzel Decorative',serif;font-size:1.2rem;color:var(--orange);margin-bottom:8px">✦ Coseli Durbar</div>
+      <p class="desc">Palace for Premium Gifts. Laser-engraved artistry crafted with love in the heart of Pokhara, Nepal. Perfect gifts for every occasion and every person.</p>
+      <div class="social-links">
+        <a href="https://wa.me/9779849432325" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:sagarchokhal0@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="#">Couple Leaf Art</a></li>
+        <li><a href="#">God & Goddess Art</a></li>
+        <li><a href="#">Custom Keyrings</a></li>
+        <li><a href="#">Engraved Lockets</a></li>
+        <li><a href="#">Bottle Art</a></li>
+        <li><a href="#">Butterfly Cards</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#booking">Book Order</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="https://wa.me/9779849432325">📱 9849432325</a></li>
+        <li><a href="mailto:sagarchokhal0@gmail.com">✉ sagarchokhal0@gmail.com</a></li>
+        <li><a href="#">📍 Batulechaur-16, Pokhara</a></li>
+        <li><a href="#">⏰ Sun–Fri 9AM–7PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Coseli Durbar. All rights reserved. Pokhara, Nepal.</span>
+    <div class="made-with"><i class="fas fa-bolt"></i> Laser Crafted with Love in Pokhara</div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/9779849432325?text=Hello! I'm interested in ordering from Coseli Durbar." target="_blank" class="wa-float" title="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><div class="toast-msg" id="toastMsg"></div></div>
+
+<script>
+// ===== PRELOADER =====
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const pre = document.getElementById('preloader');
+    pre.style.opacity = '0';
+    setTimeout(() => pre.remove(), 600);
+  }, 2200);
+});
+
+// ===== PARTICLES =====
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.setProperty('--dur', (4 + Math.random() * 8) + 's');
+  p.style.setProperty('--delay', (Math.random() * 8) + 's');
+  p.style.width = p.style.height = (2 + Math.random() * 5) + 'px';
+  particlesContainer.appendChild(p);
+}
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ===== PRODUCTS DATA =====
+const products = [
+  {
+    id: 1, cat: 'couples', badge: 'hot', badgeText: 'HOT',
+    emoji: '🍃', name: 'Couple Leaf Art',
+    desc: 'Romantic leaf art engraved with couple names, dates & heart designs. Perfect anniversary, Valentine\'s or wedding gift.',
+    price: 'NPR 350+', image: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400&q=80', rating: 5, reviews: 48
+  },
+  {
+    id: 2, cat: 'divine', badge: 'new', badgeText: 'NEW',
+    emoji: '🙏', name: 'God & Goddess Leaf Art',
+    desc: 'Sacred leaf art engraved with Lord Ganesh, Shiva, Durga, Laxmi & more. A divine gift for devotees & religious occasions.',
+    price: 'NPR 400+', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', rating: 5, reviews: 62
+  },
+  {
+    id: 3, cat: 'keyring', badge: null,
+    emoji: '🗝️', name: 'Custom Name Keyring',
+    desc: 'Laser engraved keyrings with names, initials, symbols or photos. Available in wood, acrylic, metal & leather.',
+    price: 'NPR 150+', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80', rating: 5, reviews: 95
+  },
+  {
+    id: 4, cat: 'locket', badge: null,
+    emoji: '📿', name: 'Photo Engraved Locket',
+    desc: 'Personalized lockets with photo, name, or meaningful quote engraved. Sterling silver & gold-tone finishes available.',
+    price: 'NPR 500+', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80', rating: 4, reviews: 29
+  },
+  {
+    id: 5, cat: 'bottle', badge: 'hot', badgeText: 'HOT',
+    emoji: '🍶', name: 'Engraved Bottle Art',
+    desc: 'Custom laser-engraved bottles with names, designs & logos. Perfect corporate gift or wedding favour. Stainless steel & glass.',
+    price: 'NPR 700+', image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&q=80', rating: 5, reviews: 37
+  },
+  {
+    id: 6, cat: 'business', badge: null,
+    emoji: '🏢', name: 'Company Logo Engraving',
+    desc: 'Professional logo engraving on any surface — awards, plaques, products, gifts. Ideal for corporate branding & events.',
+    price: 'NPR 800+', image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&q=80', rating: 5, reviews: 44
+  },
+  {
+    id: 7, cat: 'card', badge: 'new', badgeText: 'NEW',
+    emoji: '🦋', name: 'Butterfly Visiting Card',
+    desc: 'Stunning laser-cut butterfly-shaped business cards that unfold to reveal your contact details. Unforgettable first impression!',
+    price: 'NPR 50/card', image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&q=80', rating: 5, reviews: 56
+  },
+  {
+    id: 8, cat: 'couples', badge: null,
+    emoji: '💕', name: 'Couple Portrait Leaf Art',
+    desc: 'Your couple photo laser-etched onto premium dried natural leaves. Each leaf is unique — a one-of-a-kind keepsake.',
+    price: 'NPR 600+', image: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&q=80', rating: 5, reviews: 33
+  },
+  {
+    id: 9, cat: 'divine', badge: null,
+    emoji: '🕉️', name: 'Mantra Engraved Plaque',
+    desc: 'Sacred mantras, shlokas or verses beautifully engraved on wooden or acrylic plaques for your temple or home.',
+    price: 'NPR 550+', image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=400&q=80', rating: 5, reviews: 21
+  },
+  {
+    id: 10, cat: 'keyring', badge: null,
+    emoji: '🔑', name: 'Family Name Keyrings (Set)',
+    desc: 'Order matching keyrings for the entire family with each member\'s name. Perfect Dashain/Tihar family gift set!',
+    price: 'NPR 120/pc', image: 'https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400&q=80', rating: 5, reviews: 18
+  },
+  {
+    id: 11, cat: 'bottle', badge: null,
+    emoji: '🥃', name: 'Whisky Flask Engraving',
+    desc: 'Personalized stainless steel hip flask engraved with name, message or logo — the ultimate gift for groomsmen or bosses.',
+    price: 'NPR 900+', image: 'https://images.unsplash.com/photo-1474366521808-a47a2f2b9d2e?w=400&q=80', rating: 4, reviews: 14
+  },
+  {
+    id: 12, cat: 'business', badge: 'hot', badgeText: 'HOT',
+    emoji: '🏆', name: 'Award & Trophy Engraving',
+    desc: 'Custom engraving on awards, trophies and plaques for schools, businesses and events. Bulk orders welcomed.',
+    price: 'NPR 300+', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80', rating: 5, reviews: 27
+  }
+];
+
+let currentFilter = 'all';
+
+function renderProducts(filter) {
+  const grid = document.getElementById('productsGrid');
+  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card" onclick="openModal(${p.id})" data-cat="${p.cat}">
+      <div class="product-img-wrap">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="handleImgErr(this)">
+        ${p.badge ? `<div class="product-badge ${p.badge}">${p.badgeText}</div>` : ''}
+        <div class="product-wishlist" onclick="event.stopPropagation();toggleWish(this)">♡</div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">${getCatName(p.cat)}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-rating">
+          <div class="stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</div>
+          <div class="rating-count">(${p.reviews} reviews)</div>
+        </div>
+        <div class="product-desc">${p.desc.substring(0,80)}...</div>
+        <div class="product-footer">
+          <div class="product-price"><span class="from">Starting from</span>${p.price}</div>
+          <button class="btn-order" onclick="event.stopPropagation();orderProduct(${p.id})">Order Now</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function getCatName(cat) {
+  const names = { couples:'Couple Gifts', divine:'Devotional Art', keyring:'Keyrings', locket:'Lockets', bottle:'Bottle Art', business:'Business', card:'Visiting Cards' };
+  return names[cat] || cat;
+}
+
+function filterProducts(filter, btn) {
+  currentFilter = filter;
+  renderProducts(filter);
+  if (btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  if (!btn) {
+    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      if (b.textContent.toLowerCase().includes(filter) || (filter === 'all' && b.textContent.includes('All'))) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+  }
+}
+
+function toggleWish(el) {
+  el.classList.toggle('active');
+  el.innerHTML = el.classList.contains('active') ? '♥' : '♡';
+}
+
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modalContent').innerHTML = `
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    <img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+    <div style="font-size:0.72rem;color:var(--orange);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:6px">${getCatName(p.cat)}</div>
+    <h3>${p.name}</h3>
+    <div class="price">${p.price}</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px">
+      <span style="color:var(--gold)">${'★'.repeat(Math.floor(p.rating))}</span>
+      <span style="font-size:0.8rem;color:var(--gray)">${p.reviews} verified reviews</span>
+    </div>
+    <p>${p.desc}</p>
+    <div style="background:var(--black3);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:20px;font-size:0.83rem;color:var(--gray)">
+      <i class="fas fa-info-circle" style="color:var(--orange)"></i> 
+      100% customizable — share your names, photos, or design when you order. Turnaround: 24–48 hrs.
+    </div>
+    <div class="modal-actions">
+      <a href="https://wa.me/9779849432325?text=Hi! I want to order: ${encodeURIComponent(p.name)} from Coseli Durbar. Price: ${p.price}" target="_blank" class="btn-wa-order"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+      <button class="btn-book-modal" onclick="closeModal();document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Form</button>
+    </div>
+  `;
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('productModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function orderProduct(id) {
+  const p = products.find(x => x.id === id);
+  window.open(`https://wa.me/9779849432325?text=Hi! I want to order: ${encodeURIComponent(p.name)} from Coseli Durbar. Price: ${p.price}`, '_blank');
+}
+
+document.getElementById('productModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ===== GALLERY =====
+const galleryItems = [
+  { emoji: '🍃', label: 'Couple Leaf Art', color: '#E85D04', img: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=300&q=80' },
+  { emoji: '🙏', label: 'Divine Art', color: '#d97706', img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=80' },
+  { emoji: '🗝️', label: 'Keyring', color: '#7c3aed', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80' },
+  { emoji: '🍶', label: 'Bottle Art', color: '#059669', img: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=300&q=80' },
+  { emoji: '🦋', label: 'Visiting Card', color: '#0284c7', img: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&q=80' },
+  { emoji: '🏆', label: 'Award Engraving', color: '#d97706', img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&q=80' },
+  { emoji: '💕', label: 'Couple Portrait', color: '#dc2626', img: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300&q=80' },
+  { emoji: '📿', label: 'Locket', color: '#d97706', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&q=80' },
+];
+
+document.getElementById('galleryGrid').innerHTML = galleryItems.map(g => `
+  <div class="gallery-item">
+    <img src="${g.img}" alt="${g.label}" loading="lazy" onerror="handleGalleryErr(this,g.emoji)">
+    <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+  </div>
+`).join('');
+
+// ===== FORMS =====
+function showFile(input) {
+  document.getElementById('fileName').textContent = input.files[0] ? '✓ ' + input.files[0].name : '';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+function submitBooking(e) {
+  e.preventDefault();
+
+  const name     = document.getElementById('b_name').value.trim();
+  const phone    = document.getElementById('b_phone').value.trim();
+  const email    = document.getElementById('b_email').value.trim();
+  const category = document.getElementById('b_category').value;
+  const occasion = document.getElementById('b_occasion').value;
+  const qty      = document.getElementById('b_qty').value;
+  const design   = document.getElementById('b_design').value.trim();
+  const delivery = document.getElementById('b_delivery').value;
+  const file     = document.getElementById('fileInput').files[0];
+
+  const msg = [
+    '\u2726 NEW BOOKING \u2014 Coseli Durbar \u2726',
+    '',
+    '\uD83D\uDC64 Name: ' + name,
+    '\uD83D\uDCF1 Phone: ' + phone,
+    email ? '\uD83D\uDCE7 Email: ' + email : '',
+    '',
+    '\uD83C\uDF81 Product: ' + category,
+    '\uD83C\uDF8A Occasion: ' + (occasion || 'Not specified'),
+    '\uD83D\uDD22 Quantity: ' + qty,
+    '',
+    '\u270F\uFE0F Design / Message:',
+    design,
+    '',
+    '\uD83D\uDE9A Delivery: ' + delivery,
+    file ? '\uD83D\uDCCE Note: Customer has a reference image to share.' : '',
+    '',
+    '\u2014 Sent from Coseli Durbar website'
+  ].filter(line => line !== null && line !== undefined).join('\n');
+
+  const waURL = 'https://wa.me/9779849432325?text=' + encodeURIComponent(msg);
+  window.open(waURL, '_blank');
+
+  showToast('Opening WhatsApp with your booking! \uD83C\uDF89');
+  e.target.reset();
+  document.getElementById('fileName').textContent = '';
+}
+
+function submitContact(e) {
+  e.preventDefault();
+  showToast('Message sent! We\'ll reply within a few hours. 😊');
+  e.target.reset();
+}
+
+
+// ===== IMG ERROR HANDLERS =====
+function handleImgErr(img) {
+  const wrap = img.closest('.product-img-wrap');
+  if (!wrap) return;
+  img.style.display = 'none';
+  const card = img.closest('.product-card');
+  const catEl = card ? card.querySelector('.product-cat') : null;
+  const nameEl = card ? card.querySelector('.product-name') : null;
+  const div = document.createElement('div');
+  div.style.cssText = 'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;background:var(--black3)';
+  div.textContent = '🎁';
+  wrap.appendChild(div);
+}
+function handleGalleryErr(img, emoji) {
+  const item = img.closest('.gallery-item');
+  if (!item) return;
+  img.style.display = 'none';
+  item.style.background = 'var(--black3)';
+  item.style.display = 'flex';
+  item.style.alignItems = 'center';
+  item.style.justifyContent = 'center';
+  const div = document.createElement('div');
+  div.style.fontSize = '3rem';
+  div.textContent = emoji || '🎨';
+  item.appendChild(div);
+}
+
+// ===== SCROLL ANIMATIONS =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ===== INIT =====
+renderProducts('all');
+</script>
+</body>
+</html>
